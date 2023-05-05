@@ -1,0 +1,9 @@
+void CWE122_Heap_Based_Buffer_Overflow__CWE131_memmove_02_bad()
+int * data ;
+data = NULL;
+if ( 1 )
+printf("%s\n",data );
+data = ( int * ) malloc ( 10 );
+int source [ 10 ] = { 0 } ;
+memmove ( data , source , 10 * sizeof ( int ) );
+free ( data );

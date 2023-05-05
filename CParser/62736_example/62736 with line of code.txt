@@ -1,0 +1,114 @@
+1 62736/CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45.c memset 102
+void CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45_bad() 72
+WSADATA wsaData ; 79
+int recvResult ; 82
+struct sockaddr_in service ; 83
+char inputBuffer [ CHAR_ARRAY_SIZE ] ; 86
+if ( WSAStartup ( MAKEWORD ( 2 , 2 ) , & wsaData ) != NO_ERROR )  90
+listenSocket = socket ( AF_INET , SOCK_STREAM , IPPROTO_TCP ); 97
+if ( listenSocket == INVALID_SOCKET )  98
+memset ( & service , 0 , sizeof ( service ) ); 102
+service . sin_family = AF_INET; 103
+service . sin_addr . s_addr = INADDR_ANY; 104
+service . sin_port = htons ( TCP_PORT ); 105
+if ( bind ( listenSocket , ( struct sockaddr * ) & service , sizeof ( service ) ) == SOCKET_ERROR )  106
+if ( listen ( listenSocket , LISTEN_BACKLOG ) == SOCKET_ERROR )  110
+acceptSocket = accept ( listenSocket , NULL , NULL ); 114
+if ( acceptSocket == SOCKET_ERROR )  115
+recvResult = recv ( acceptSocket , inputBuffer , CHAR_ARRAY_SIZE - 1 , 0 ); 120
+if ( recvResult == SOCKET_ERROR || recvResult == 0 )  121
+while ( 0 )  130
+------------------------------
+2 /home/zheng/Desktop/SARD+NVD/0/62736/CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45.c memset 245
+static void goodB2G() 215
+WSADATA wsaData ; 222
+int recvResult ; 225
+struct sockaddr_in service ; 226
+char inputBuffer [ CHAR_ARRAY_SIZE ] ; 229
+if ( WSAStartup ( MAKEWORD ( 2 , 2 ) , & wsaData ) != NO_ERROR )  233
+listenSocket = socket ( AF_INET , SOCK_STREAM , IPPROTO_TCP ); 240
+if ( listenSocket == INVALID_SOCKET )  241
+memset ( & service , 0 , sizeof ( service ) ); 245
+service . sin_family = AF_INET; 246
+service . sin_addr . s_addr = INADDR_ANY; 247
+service . sin_port = htons ( TCP_PORT ); 248
+if ( bind ( listenSocket , ( struct sockaddr * ) & service , sizeof ( service ) ) == SOCKET_ERROR )  249
+if ( listen ( listenSocket , LISTEN_BACKLOG ) == SOCKET_ERROR )  253
+acceptSocket = accept ( listenSocket , NULL , NULL ); 257
+if ( acceptSocket == SOCKET_ERROR )  258
+recvResult = recv ( acceptSocket , inputBuffer , CHAR_ARRAY_SIZE - 1 , 0 ); 263
+if ( recvResult == SOCKET_ERROR || recvResult == 0 )  264
+while ( 0 )  273
+------------------------------
+3 /home/zheng/Desktop/SARD+NVD/0/62736/io.c rand 159
+int globalReturnsTrueOrFalse() 157
+return ( rand ( ) % 2 ) ; 159
+------------------------------
+4 /home/zheng/Desktop/SARD+NVD/0/62736/CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45.c srand 310
+int main(int argc, char * argv[]) 307
+srand ( ( unsigned ) time ( NULL ) ); 310
+------------------------------
+5 /home/zheng/Desktop/SARD+NVD/0/62736/CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45.c socket 97
+void CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45_bad() 72
+WSADATA wsaData ; 79
+int recvResult ; 82
+struct sockaddr_in service ; 83
+char inputBuffer [ CHAR_ARRAY_SIZE ] ; 86
+if ( WSAStartup ( MAKEWORD ( 2 , 2 ) , & wsaData ) != NO_ERROR )  90
+listenSocket = socket ( AF_INET , SOCK_STREAM , IPPROTO_TCP ); 97
+if ( listenSocket == INVALID_SOCKET )  98
+memset ( & service , 0 , sizeof ( service ) ); 102
+service . sin_family = AF_INET; 103
+service . sin_addr . s_addr = INADDR_ANY; 104
+service . sin_port = htons ( TCP_PORT ); 105
+if ( bind ( listenSocket , ( struct sockaddr * ) & service , sizeof ( service ) ) == SOCKET_ERROR )  106
+if ( listen ( listenSocket , LISTEN_BACKLOG ) == SOCKET_ERROR )  110
+acceptSocket = accept ( listenSocket , NULL , NULL ); 114
+if ( acceptSocket == SOCKET_ERROR )  115
+recvResult = recv ( acceptSocket , inputBuffer , CHAR_ARRAY_SIZE - 1 , 0 ); 120
+if ( recvResult == SOCKET_ERROR || recvResult == 0 )  121
+inputBuffer [ recvResult ] = '\0'; 126
+data = atoi ( inputBuffer ); 128
+while ( 0 )  130
+if ( listenSocket != INVALID_SOCKET )  131
+CLOSE_SOCKET ( listenSocket ); 133
+if ( acceptSocket != INVALID_SOCKET )  135
+CLOSE_SOCKET ( acceptSocket ); 137
+CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45_badData = data; 146
+------------------------------
+6 /home/zheng/Desktop/SARD+NVD/0/62736/CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45.c socket 240
+static void goodB2G() 215
+WSADATA wsaData ; 222
+int recvResult ; 225
+struct sockaddr_in service ; 226
+char inputBuffer [ CHAR_ARRAY_SIZE ] ; 229
+if ( WSAStartup ( MAKEWORD ( 2 , 2 ) , & wsaData ) != NO_ERROR )  233
+listenSocket = socket ( AF_INET , SOCK_STREAM , IPPROTO_TCP ); 240
+if ( listenSocket == INVALID_SOCKET )  241
+memset ( & service , 0 , sizeof ( service ) ); 245
+service . sin_family = AF_INET; 246
+service . sin_addr . s_addr = INADDR_ANY; 247
+service . sin_port = htons ( TCP_PORT ); 248
+if ( bind ( listenSocket , ( struct sockaddr * ) & service , sizeof ( service ) ) == SOCKET_ERROR )  249
+if ( listen ( listenSocket , LISTEN_BACKLOG ) == SOCKET_ERROR )  253
+acceptSocket = accept ( listenSocket , NULL , NULL ); 257
+if ( acceptSocket == SOCKET_ERROR )  258
+recvResult = recv ( acceptSocket , inputBuffer , CHAR_ARRAY_SIZE - 1 , 0 ); 263
+if ( recvResult == SOCKET_ERROR || recvResult == 0 )  264
+inputBuffer [ recvResult ] = '\0'; 269
+data = atoi ( inputBuffer ); 271
+while ( 0 )  273
+if ( listenSocket != INVALID_SOCKET )  274
+CLOSE_SOCKET ( listenSocket ); 276
+if ( acceptSocket != INVALID_SOCKET )  278
+CLOSE_SOCKET ( acceptSocket ); 280
+CWE121_Stack_Based_Buffer_Overflow__CWE129_listen_socket_45_goodB2GData = data; 289
+------------------------------
+7 /home/zheng/Desktop/SARD+NVD/0/62736/io.c sscanf 115
+size_t decodeHexChars(unsigned char * bytes, size_t numBytes, const char * hex) 104
+size_t numWritten = 0 ; 106
+while ( numWritten < numBytes && isxdigit ( hex [ 2 * numWritten ] ) && isxdigit ( hex [ 2 * numWritten + 1 ] ) )  112
+int byte ; 114
+sscanf ( & hex [ 2 * numWritten ] , "%02x" , & byte ); 115
+bytes [ numWritten ] = ( unsigned char ) byte; 116
+------------------------------

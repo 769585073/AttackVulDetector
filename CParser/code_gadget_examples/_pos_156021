@@ -1,0 +1,6 @@
+void zero_division_006 ()
+int dividend = 1000 ;
+int * p ;
+int ret ;
+p = & zero_division_006_gbl_divisor;
+ret = dividend / * p;
